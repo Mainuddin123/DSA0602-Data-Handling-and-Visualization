@@ -1,0 +1,17 @@
+# Assuming you have a data frame named 'employee_data' with columns 'Employee ID', 'Years of Service', and 'Performance Score'
+employee_data <- data.frame(
+  EmployeeID = c(1, 2, 3, 4, 5),
+  Department = c("Sales", "HR", "Marketing", "Sales", "HR"),
+  YearsOfService = c(5, 3, 7, 4, 2),
+  PerformanceScore = c(85, 92, 78, 90, 76)
+)
+
+# Plotting the line chart
+plot(employee_data$YearsOfService, employee_data$PerformanceScore, type = "o", col = employee_data$Department,
+     xlab = "Years of Service", ylab = "Performance Score",
+     main = "Performance Trend of Employees Over Time")
+legend("topright", legend = unique(employee_data$Department), col = unique(employee_data$Department), pch = 1)
+# Plotting the bar chart
+barplot(table(employee_data$Department), col = "lightblue",
+        xlab = "Department", ylab = "Number of Employees",
+        main = "Distribution of Employees Across Departments")
