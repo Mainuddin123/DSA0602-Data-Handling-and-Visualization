@@ -1,1 +1,25 @@
 
+# Stock Data
+stock_data <- data.frame(
+  Date = as.Date(c("2023-01-01", "2023-01-02", "2023-01-03")),
+  Stock_A = c(100, 105, 110),
+  Stock_B = c(150, 152, 148),
+  Stock_C = c(120, 118, 122)
+)
+
+# Part (a): Line chart for stock prices over time
+plot(stock_data$Date, stock_data$Stock_A, type = "l", col = "blue", lty = 1,
+     xlab = "Date", ylab = "Stock Price", main = "Stock Prices Over Time",
+     ylim = c(0, max(stock_data$Stock_A, stock_data$Stock_B, stock_data$Stock_C)))
+lines(stock_data$Date, stock_data$Stock_B, col = "red", lty = 2)
+lines(stock_data$Date, stock_data$Stock_C, col = "green", lty = 3)
+legend("topright", legend = c("Stock A", "Stock B", "Stock C"),
+       col = c("blue", "red", "green"), lty = 1:3)
+
+# Part (b): Bar chart for daily percentage change in Stock A
+percentage_change_A <- c(0, diff(stock_data$Stock_A) / stock_data$Stock_A[-length(stock_data$Stock_A)] * 100)
+barplot(percentage_change_A, col = "skyblue", main = "Daily Percentage Change in Stock A",
+        xlab = "Date", ylab = "Percentage Change (%)", names.arg = as.character(stock_data$Date))
+
+# Part (c): Display stock price data table
+print(stock_data)
