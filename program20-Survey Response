@@ -1,9 +1,3 @@
-# Load required libraries
-library(ggplot2)
-library(tidyr)
-library(knitr)
-library(kableExtra)
-
 # Data
 survey_data <- data.frame(
   Survey_ID = c(1, 2, 3),
@@ -13,26 +7,21 @@ survey_data <- data.frame(
 )
 
 # a. Grouped bar chart for the distribution of answers for Question 1
-survey_data_long <- gather(survey_data, key = "Question", value = "Answer", -Survey_ID)
+question_1_counts <- table(survey_data$Question_1)
 
-ggplot(survey_data_long, aes(x = Answer, fill = Answer)) +
-  geom_bar(stat = "count") +
-  facet_wrap(~Question) +
-  labs(title = "Distribution of Answers for Question 1",
-       x = "Answer",
-       y = "Count") +
-  theme_minimal()
+barplot(question_1_counts, col = rainbow(length(question_1_counts)),
+        main = "Distribution of Answers for Question 1",
+        xlab = "Answer",
+        ylab = "Count")
 
 # b. Stacked bar chart for the overall distribution of responses for all three questions
-survey_data_long <- gather(survey_data, key = "Question", value = "Answer", -Survey_ID)
+overall_counts <- table(unlist(survey_data[, -1]))
 
-ggplot(survey_data_long, aes(x = Survey_ID, fill = Answer)) +
-  geom_bar(stat = "count") +
-  labs(title = "Overall Distribution of Responses for All Questions",
-       x = "Survey ID",
-       y = "Count") +
-  theme_minimal()
+barplot(overall_counts, col = rainbow(length(overall_counts)),
+        main = "Overall Distribution of Responses for All Questions",
+        xlab = "Survey ID",
+        ylab = "Count")
 
 # c. Table for survey response data for each survey
-kable(survey_data, caption = "Survey Response Data for Each Survey") %>%
-  kable_styling(bootstrap_options = c("striped", "hover"))
+cat("Survey Response Data for Each Survey\n")
+print(survey_data)
