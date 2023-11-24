@@ -4,12 +4,6 @@ employee_sales <- data.frame(
   Sales = c(5000, 6200, 4500, 7400)
 )
 
-# Employee Sales Data
-employee_sales <- data.frame(
-  Employee = c("John", "Alice", "Bob", "Sarah"),
-  Sales = c(5000, 6200, 4500, 7400)
-)
-
 # Line chart for monthly sales
 plot(employee_sales$Sales, type = "l", col = "blue",
      main = "Monthly Sales by Employee",
